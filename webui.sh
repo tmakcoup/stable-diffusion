@@ -281,25 +281,25 @@ prepare_tcmalloc() {
     fi
 }
 
-KEEP_GOING=1
-export SD_WEBUI_RESTART=tmp/restart
-while [[ "$KEEP_GOING" -eq "1" ]]; do
-    # shellcheck disable=SC2077
-    if [[ ! -z "${ACCELERATE}" ]] && [ ${ACCELERATE}="True" ] && [ -x "$(command -v accelerate)" ]; then
-        printf "\n%s\n" "${delimiter}"
-        printf "Accelerating launch.py..."
-        printf "\n%s\n" "${delimiter}"
-        prepare_tcmalloc
-        accelerate launch --num_cpu_threads_per_process=6 "${LAUNCH_SCRIPT}" "$@"
-    else
-        printf "\n%s\n" "${delimiter}"
-        printf "Launching launch.py..."
-        printf "\n%s\n" "${delimiter}"
-        prepare_tcmalloc
-        "${python_cmd}" -u "${LAUNCH_SCRIPT}" "$@"
-    fi
-
-    if [[ ! -f tmp/restart ]]; then
-        KEEP_GOING=0
-    fi
-done
+#KEEP_GOING=1
+#export SD_WEBUI_RESTART=tmp/restart
+#while [[ "$KEEP_GOING" -eq "1" ]]; do
+#    # shellcheck disable=SC2077
+#    if [[ ! -z "${ACCELERATE}" ]] && [ ${ACCELERATE}="True" ] && [ -x "$(command -v accelerate)" ]; then
+#        printf "\n%s\n" "${delimiter}"
+#        printf "Accelerating launch.py..."
+#        printf "\n%s\n" "${delimiter}"
+#        prepare_tcmalloc
+#        accelerate launch --num_cpu_threads_per_process=6 "${LAUNCH_SCRIPT}" "$@"
+#    else
+#        printf "\n%s\n" "${delimiter}"
+#        printf "Launching launch.py..."
+#        printf "\n%s\n" "${delimiter}"
+#        prepare_tcmalloc
+#        "${python_cmd}" -u "${LAUNCH_SCRIPT}" "$@"
+#    fi
+#
+#    if [[ ! -f tmp/restart ]]; then
+#        KEEP_GOING=0
+#    fi
+#done
